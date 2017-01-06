@@ -1,6 +1,6 @@
 var express = require('express');
 var ParseServer = require('parse-server').ParseServer;
-
+var databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI;
 var app = express();
 var api = new ParseServer({
 	serverURL: 'https://goaltrainerps.herokuapp.com/parse',

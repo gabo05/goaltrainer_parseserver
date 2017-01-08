@@ -15,6 +15,7 @@
   "license": "ISC",
   "homepage": "https://bitbucket.org/gabo05/goaltrainer_parseserver#readme",
   "dependencies": {
+    "express": "~4.11.x",
     "parse-server": "^2.3.1"
   }
 }

@@ -17,9 +17,9 @@ Parse.Cloud.define('makeFriends', function(req, res){
 			 	data: {title: user.get("username")+" accept your invitation!"}
 			}, { useMasterKey: true })
 			.then(function() {
-			 	res.success({status: true;});
+			 	res.success({status: true});
 			}, function(error) {
-				res.success({status: false;});
+				res.success({status: false});
 			});
 		});
 	});
@@ -43,9 +43,9 @@ Parse.Cloud.define('sendFriendRequest', function(req, res){
 			 	}
 			}, { useMasterKey: true })
 			.then(function() {
-			 	res.success({status: true;});
+			 	res.success({status: true});
 			}, function(error) {
-				res.success({status: false;});
+				res.success({status: false});
 			});
 		});
 	});

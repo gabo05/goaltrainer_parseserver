@@ -14,7 +14,7 @@ Parse.Cloud.define('sendFriendRequest', function(req, res){
 			 	data: {
 			 		title: "Friend Request",
 			 		message: user.get("username")+" want to be your friend!",
-			 		userId: user.get("objectId"),
+			 		userId: user.id,
 			 		type: 1,
 			 		goalId: ""
 			 	}
@@ -73,7 +73,7 @@ Parse.Cloud.define('sendConfirmRequest', function(req, res){
 				 	where: query,
 				 	data: {
 				 		title: user.get("username")+" want you to confirm a goal",
-				 		userId: user.get("objectId"),
+				 		userId: user.id,
 				 		message: req.params.goaldesc,
 				 		goalId: req.params.goalid,
 				 		type: 3
@@ -108,7 +108,7 @@ Parse.Cloud.define('confirmGoal', function(req, res){
 			 	where: query,
 			 	data: {
 			 		title: user.get("username")+" has confirmed your goal",
-			 		userId: user.get("objectId"),
+			 		userId: user.id,
 			 		message: goal.get("description"),
 			 		goalId: req.params.goalid,
 			 		type: 4

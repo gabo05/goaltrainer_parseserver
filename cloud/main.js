@@ -31,13 +31,19 @@ Parse.Cloud.define('makeFriends', function(req, res){
 	var query = new Parse.Query("User");
 	query.equalTo("objectId", req.params.user1);
 	query.first().then(function(user){
-		var relation = user.relation("friends");
 
 		query = new Parse.Query("User");
 		query.equalTo("objectId", req.params.user2);
 		query.first().then(function(friend){
+			//User friend of Friend
+			var relation = user.relation("friends");
 			relation.add(friend);
 			user.save(null, {useMasterKey: true});
+			//Friend friend of User
+			relation = friend.relation("friends");
+			relation.add(user);
+			friend.save(null, {useMasterKey: true});
+
 			query = new Parse.Query("Installation");
 			query.equalTo("user", friend);
 

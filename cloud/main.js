@@ -12,8 +12,8 @@ Parse.Cloud.define('sendFriendRequest', function(req, res){
 			Parse.Push.send({
 			 	where: query,
 			 	data: {
-			 		title: user.get("username")+" want to be your friend!",
-			 		message: "",
+			 		title: "Friend Request",
+			 		message: user.get("username")+" want to be your friend!",
 			 		userId: user.get("objectId"),
 			 		type: 1,
 			 		goalId: ""

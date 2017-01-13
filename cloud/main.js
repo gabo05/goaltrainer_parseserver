@@ -28,6 +28,7 @@ Parse.Cloud.define('sendFriendRequest', function(req, res){
 	});
 });
 Parse.Cloud.define('makeFriends', function(req, res){
+	Parse.Cloud.useMasterKey();
 	var query = new Parse.Query("User");
 	query.equalTo("objectId", req.params.user1);
 	query.first().then(function(user){
@@ -92,6 +93,7 @@ Parse.Cloud.define('sendConfirmRequest', function(req, res){
 	});
 });
 Parse.Cloud.define('confirmGoal', function(req, res){
+	Parse.Cloud.useMasterKey();
 	var query = new Parse.Query("Goal");
 	query.equalTo("objectId", req.params.goalid);
 

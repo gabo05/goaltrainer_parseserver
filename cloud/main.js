@@ -28,7 +28,6 @@ Parse.Cloud.define('sendFriendRequest', function(req, res){
 	});
 });
 Parse.Cloud.define('makeFriends', function(req, res){
-	Parse.Cloud.useMasterKey();
 	var query = new Parse.Query("User");
 	query.equalTo("objectId", req.params.user1);
 	query.first().then(function(user){
@@ -38,7 +37,7 @@ Parse.Cloud.define('makeFriends', function(req, res){
 		query.equalTo("objectId", req.params.user2);
 		query.first().then(function(friend){
 			relation.add(friend);
-			user.save();
+			user.save(null, {useMasterKey: true});
 			query = new Parse.Query("Installation");
 			query.equalTo("user", friend);
 
@@ -93,14 +92,13 @@ Parse.Cloud.define('sendConfirmRequest', function(req, res){
 	});
 });
 Parse.Cloud.define('confirmGoal', function(req, res){
-	Parse.Cloud.useMasterKey();
 	var query = new Parse.Query("Goal");
 	query.equalTo("objectId", req.params.goalid);
 
 	query.first().then(function(goal){
 		goal.set("status", 3);
 		goal.increment("confirmed");
-		goal.save();
+		goal.save(null, {useMasterKey: true});
 		query = new Parse.Query("User");
 		query.equalTo("objectId", req.params.userid);
 		query.first().then(function(user){

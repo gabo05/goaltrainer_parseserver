@@ -48,7 +48,7 @@ Parse.Cloud.define('makeFriends', function(req, res){
 			 		message: user.get("username")+" and you are friends now.",
 			 		type: 2,
 			 		userId: req.params.user2,
-			 		goaId: ""
+			 		goalId: ""
 			 	}
 			}, { useMasterKey: true })
 			.then(function() {

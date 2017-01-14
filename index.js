@@ -14,7 +14,7 @@ var api = new ParseServer({
   	cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
 	appId: process.env.APP_ID || 'myAppId',
 	fileKey: 'myFileKey',
-	masterKey: process.env.MASTER_KEY || 'myMasterKey',
+	masterKey: process.env.MASTER_KEY || 'myMasterKey'/*,
 	push: {
 		android: {
         senderId: process.env.GCM_SENDERID || '',

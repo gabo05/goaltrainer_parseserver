@@ -100,8 +100,13 @@ Parse.Cloud.define('sendConfirmRequest', function(req, res){
 Parse.Cloud.define('confirmGoal', function(req, res){
 	var query = new Parse.Query("Goal");
 	query.equalTo("objectId", req.params.goalid);
-	query.include("user");
-	query.first().then(function(goal){
+	//query.include("user");
+	query.first()
+	.then(function(goal){
+		return Parse.Promise.when([goal.get("user").fetch()]);
+	})
+	.then(function(fetched){
+		var goal = fetched.get("parent");
 		goal.set("status", 3);
 		goal.increment("confirmed");
 		goal.save(null, {useMasterKey: true});
@@ -109,7 +114,7 @@ Parse.Cloud.define('confirmGoal', function(req, res){
 		query.equalTo("objectId", req.params.userid);
 		query.first().then(function(user){
 			query = new Parse.Query("Installation");
-			query.equalTo("user", goal.get("user"));
+			query.equalTo("user", fetched);
 			Parse.Push.send({
 			 	where: query,
 			 	data: {

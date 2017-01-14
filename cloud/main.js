@@ -100,7 +100,7 @@ Parse.Cloud.define('sendConfirmRequest', function(req, res){
 Parse.Cloud.define('confirmGoal', function(req, res){
 	var query = new Parse.Query("Goal");
 	query.equalTo("objectId", req.params.goalid);
-
+	query.include("user");
 	query.first().then(function(goal){
 		goal.set("status", 3);
 		goal.increment("confirmed");
@@ -109,7 +109,7 @@ Parse.Cloud.define('confirmGoal', function(req, res){
 		query.equalTo("objectId", req.params.userid);
 		query.first().then(function(user){
 			query = new Parse.Query("Installation");
-			query.equalTo("userId", goal.get("userId"));
+			query.equalTo("user", goal.get("user"));
 			Parse.Push.send({
 			 	where: query,
 			 	data: {

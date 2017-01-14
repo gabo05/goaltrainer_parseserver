@@ -100,7 +100,6 @@ Parse.Cloud.define('sendConfirmRequest', function(req, res){
 Parse.Cloud.define('confirmGoal', function(req, res){
 	var query = new Parse.Query("Goal");
 	query.equalTo("objectId", req.params.goalid);
-	//query.include("user");
 	query.first()
 	.then(function(goal){
 		return Parse.Promise.when([goal.get("user").fetch()]);
